@@ -1,0 +1,23 @@
+version: "5"
+services:
+  mysql-db-docker-compose-container:
+    image: mysql:latest
+    container_name: "mysql-db-docker-compose-container"
+    environment:
+      MYSQL_DATABASE: 'testdb'
+      MYSQL_ROOT_PASSWORD: 'Welcome123'
+    ports:
+      - 3306:3306
+
+  spring-mysql-docker-compose-container:
+    image: spring-mysql-docker-compose:latest
+    container_name: "spring-mysql-docker-compose-container"
+    environment:
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'Welcome123'
+      MYSQL_PORT: 3306
+      MYSQL_HOST: mysql-db-docker-compose-container
+    ports:
+      - 9090:8080
+    links:
+      - mysql-db-docker-compose-container
